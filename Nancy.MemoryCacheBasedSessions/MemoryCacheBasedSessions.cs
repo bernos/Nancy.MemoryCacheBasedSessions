@@ -37,6 +37,13 @@ namespace Nancy.Session
         /// <param name="response"></param>
         public void Save(string sessionId, ISession session, Response response)
         {
+            var sess = session as Session;
+
+            if (sess == null)
+            {
+                return;
+            }
+
             var dict = new Dictionary<string, object>();
 
             foreach (var kvp in session)
