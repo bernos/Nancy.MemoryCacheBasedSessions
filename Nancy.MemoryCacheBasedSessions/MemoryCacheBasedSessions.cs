@@ -3,6 +3,7 @@ using Nancy.Bootstrapper;
 using Nancy.Cookies;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Runtime.Caching;
 using System.Text;
@@ -28,6 +29,16 @@ namespace Nancy.Session
             _cache = cache;
         }
 
+        private int GetSessionTimeout()
+        {
+            if (ConfigurationManager.AppSettings["Nancy:MemoryCacheBasedSessions:SessionTimeoutMinutes"] != null)
+            {
+                return
+                    int.Parse(ConfigurationManager.AppSettings["Nancy:MemoryCacheBasedSessions:SessionTimeoutMinutes"]);
+            }
+            return 30;
+        }
+
         /// <summary>
         /// Save the session data to the memory cache, and set the session id cookie
         /// in the response
@@ -38,6 +49,7 @@ namespace Nancy.Session
         public void Save(string sessionId, ISession session, Response response)
         {
             var sess = session as Session;
+            var t = GetSessionTimeout();
 
             if (sess == null)
             {
@@ -52,10 +64,10 @@ namespace Nancy.Session
             }
 
             var cookie = new NancyCookie(SessionIdKey, sessionId);
-            cookie.Expires = DateTime.UtcNow.AddMinutes(30);
+            cookie.Expires = DateTime.UtcNow.AddMinutes(t);
             response.AddCookie(cookie);
 
-            _cache.Set(sessionId, dict, DateTime.Now + TimeSpan.FromMinutes(30 + 1));
+            _cache.Set(sessionId, dict, DateTime.Now + TimeSpan.FromMinutes(t + 1));
         }
 
         /// <summary>
