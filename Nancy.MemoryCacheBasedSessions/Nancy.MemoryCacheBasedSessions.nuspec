@@ -7,11 +7,11 @@
     <authors>$author$</authors>
     <owners>$author$</owners>
     <!-- <licenseUrl>http://LICENSE_URL_HERE_OR_DELETE_THIS_LINE</licenseUrl> -->
-    <projectUrl>https://bitbucket.org/bernos/nancy.memorycachebasedsessions</projectUrl>
+    <projectUrl>https://github.com/bernos/Nancy.MemoryCacheBasedSessions</projectUrl>
     <!--<iconUrl>http://ICON_URL_HERE_OR_DELETE_THIS_LINE</iconUrl>-->
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
-    <!--<releaseNotes>Summary of changes made in this release of the package.</releaseNotes>-->
+    <releaseNotes>Updated dependencies to Nancy 0.23.0.0. Updated project url to new github repo address.</releaseNotes>
     <copyright>Copyright 2014</copyright>
     <tags>Nancy</tags>
   </metadata>
